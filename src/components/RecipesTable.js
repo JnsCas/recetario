@@ -12,6 +12,7 @@ class RecipesTable extends React.Component {
     }
 
     this.showRecipe = this.showRecipe.bind(this)
+    this.averageScore = this.averageScore.bind(this)
   }
 
   showRecipe(e, recipe) {
@@ -22,10 +23,18 @@ class RecipesTable extends React.Component {
     })
   }
 
+  averageScore(scores) {
+    console.log(scores)
+    const totalScores = scores.reduce((a, b) => a+b)
+    console.log(totalScores)
+    const newAverage = totalScores / scores.length
+    return Number.isInteger(newAverage) ? newAverage : newAverage.toFixed(1)
+  }
+
   render() {
-    let tableToShow;
+    let viewToShow;
     if (this.state.isShowingRecipe) {
-      tableToShow = <Recipe
+      viewToShow = <Recipe
         recipeSelected={this.state.recipeSelected}
       />
     } else {
@@ -35,7 +44,7 @@ class RecipesTable extends React.Component {
       } else {
         secondColumnName = "Promedio"
       }
-      tableToShow =
+      viewToShow =
         <Table striped bordered hover>
           <thead align="center">
           <tr>
@@ -49,43 +58,16 @@ class RecipesTable extends React.Component {
               <td>
                 <a href="#" onClick={(e) => this.showRecipe(e, recipe)}>{recipe.name} </a>
               </td>
-              <td>{recipe.score}</td>
+              <td>
+                {this.averageScore(recipe.scores)}
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
     }
 
-    return tableToShow;
-
-    /*
-    let secondColumnName;
-    if (this.props.isMenuView) {
-      secondColumnName = "Puntaje"
-    } else {
-      secondColumnName = "Promedio"
-    }
-    return (
-      <Table striped bordered hover>
-        <thead align="center">
-        <tr>
-          <th>Recetas</th>
-          <th>{secondColumnName}</th>
-        </tr>
-        </thead>
-        <tbody align="center">
-        {this.props.recipes.map(recipe => (
-          <tr key={recipe.name}>
-            <td>
-              <a href="#" onClick={this.showRecipe}>{recipe.name} </a>
-            </td>
-            <td>{recipe.score}</td>
-          </tr>
-        ))}
-        </tbody>
-      </Table>
-    )
-     */
+    return viewToShow;
   }
 }
 

@@ -25,10 +25,38 @@
   flex-direction: row;
 }
 
-.Ingredients {
+.Steps {
 
 }
 
-.Steps {
+.Recipe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5%;
+}
 
+.Recipe-title {
+  padding-bottom: 5%;
+}
+
+.Recipe-tabs {
+  padding-bottom: 2%;
+}
+
+.Ingredients {
+  padding: 5%;
+}
+
+.Ingredients-input {
+  width: 15%;
+}
+
+.Score-push {
+
+}
+
+.Score-push-input {
+  width: auto;
+  margin-right: 10%;
 }
