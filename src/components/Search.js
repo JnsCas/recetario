@@ -21,7 +21,7 @@ class Search extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    alert(this.state.toSearch)
+    this.props.onClickSearchButton(this.state.toSearch)
   }
 
   render() {
@@ -30,6 +30,7 @@ class Search extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
+            pattern="[a-zA-Z]*"
             placeholder="Receta..."
             value={this.state.toSearch}
             onChange={this.handleChange}

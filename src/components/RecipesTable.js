@@ -8,22 +8,23 @@ class RecipesTable extends React.Component {
     super(props);
     this.state = {
       isShowingRecipe: false,
-      recipeSelected: {}
+      recipeSelected: {},
+      recipeAverageSelected: 0
     }
 
     this.showRecipe = this.showRecipe.bind(this)
-    this.averageScore = this.averageScore.bind(this)
+    this.calculateAverageScore = this.calculateAverageScore.bind(this)
   }
 
-  showRecipe(e, recipe) {
+  showRecipe(e, recipeAndAverage) {
     e.preventDefault()
     this.setState({
       isShowingRecipe: true,
-      recipeSelected: recipe
+      recipeSelected: recipeAndAverage.recipe,
+      recipeAverageSelected: recipeAndAverage.average
     })
   }
-
-  averageScore(scores) {
+  calculateAverageScore(scores) {
     console.log(scores)
     const totalScores = scores.reduce((a, b) => a+b)
     console.log(totalScores)
@@ -36,14 +37,21 @@ class RecipesTable extends React.Component {
     if (this.state.isShowingRecipe) {
       viewToShow = <Recipe
         recipeSelected={this.state.recipeSelected}
+        recipeAverageSelected={this.state.recipeAverageSelected}
       />
     } else {
       let secondColumnName;
-      if (this.props.isMenuView) {
+      if (this.props.isMenuView) { //FIXME
         secondColumnName = "Puntaje"
       } else {
         secondColumnName = "Promedio"
       }
+      const recipesAndAverage = this.props.recipes.map(recipe => {
+        let recipeAndAverage = {};
+        recipeAndAverage.recipe = recipe;
+        recipeAndAverage.average = this.calculateAverageScore(recipe.scores);
+        return recipeAndAverage;
+      })
       viewToShow =
         <Table striped bordered hover>
           <thead align="center">
@@ -53,13 +61,13 @@ class RecipesTable extends React.Component {
           </tr>
           </thead>
           <tbody align="center">
-          {this.props.recipes.map(recipe => (
-            <tr key={recipe.name}>
+          {recipesAndAverage.map((recipeAndAverage) => (
+            <tr key={recipeAndAverage.recipe.name}>
               <td>
-                <a href="#" onClick={(e) => this.showRecipe(e, recipe)}>{recipe.name} </a>
+                <a href="#" onClick={(e) => this.showRecipe(e, recipeAndAverage)}>{recipeAndAverage.recipe.name} </a>
               </td>
               <td>
-                {this.averageScore(recipe.scores)}
+                {recipeAndAverage.average}
               </td>
             </tr>
           ))}

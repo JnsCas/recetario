@@ -16,7 +16,7 @@ class Ingredients extends React.Component {
 
   calculateQuantityIngredients(e) {
     const newPeopleQuantity = e.target.value
-    if (newPeopleQuantity && newPeopleQuantity > -1) {
+    if (newPeopleQuantity) {
       const newIngredients = this.state.originalIngredients.map( (ingredient) => {
         let newIngredient = {};
         newIngredient.name = ingredient.name;
@@ -37,6 +37,7 @@ class Ingredients extends React.Component {
           <label>Para <input
               className="Ingredients-input"
               type="number"
+              min="1"
               placeholder={this.state.variablePeopleQuantity}
               onChange={this.calculateQuantityIngredients}
             /> personas

@@ -16,6 +16,7 @@ class App extends React.Component {
       isShowingMenu: true
     }
     this.changeTableToShow = this.changeTableToShow.bind(this)
+    this.filterRecipes = this.filterRecipes.bind(this)
   }
 
   componentDidMount() {
@@ -45,6 +46,30 @@ class App extends React.Component {
     })
   }
 
+  /**
+   *  TODO
+   */
+  filterRecipes(toSearch) {
+    const queryParam = toSearch !== '' ? `?filter=${toSearch}` : ""
+    fetch("http://localhost:3001/recipes" + queryParam)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          this.setState({
+            isLoaded: true,
+            recipes: result
+          });
+        },
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
   render() {
     if (this.state.error) {
       return <div>Error: {this.state.error.message}</div>;
@@ -65,7 +90,7 @@ class App extends React.Component {
             <h1>Recetario</h1>
           </div>
           <div className="App-body">
-            <Search/>
+            <Search onClickSearchButton={this.filterRecipes}/>
             <a href="#" onClick={this.changeTableToShow}> Ver {textButton} </a>
             {tableToShow}
           </div>

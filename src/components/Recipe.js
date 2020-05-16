@@ -12,7 +12,7 @@ class Recipe extends React.Component {
     this.state = {
       key: "ingredients",
       recipe: this.props.recipeSelected,
-      newScore: 0
+      alreadyPush: false
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -27,13 +27,22 @@ class Recipe extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    this.state.recipe.scores.push(parseInt(this.state.newScore))
+    if (this.state.newScore) {
+      if (this.state.alreadyPush) {
+        alert("Solo puedes votar 1 vez.")
+      } else {
+        this.state.recipe.scores.push(parseInt(this.state.newScore))
+      }
+      this.setState({
+        alreadyPush: true
+      })
+    }
   }
 
   render() {
     return(
       <div className="Recipe">
-        <h2 className="Recipe-title"> {this.state.recipe.name} ({this.state.recipe.score}) </h2>
+        <h2 className="Recipe-title"> {this.state.recipe.name} ({this.props.recipeAverageSelected}) </h2>
         <Tabs
           id="controlled-tab-example"
           className="Recipe-tabs"
@@ -55,6 +64,8 @@ class Recipe extends React.Component {
             <input
               className="Score-push-input"
               type="number"
+              min="1"
+              max="5"
               placeholder="Puntaje"
               onChange={this.handleChange}
             />
