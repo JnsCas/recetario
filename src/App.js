@@ -67,7 +67,6 @@ class App extends React.Component {
           <div className="App-body">
             <Search/>
             <a href="#" onClick={this.changeTableToShow}> Ver {textButton} </a>
-
             {tableToShow}
           </div>
         </div>
