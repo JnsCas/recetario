@@ -17,6 +17,26 @@ class Recipe extends React.Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.putScore = this.putScore.bind(this)
+  }
+
+  putScore(id, score) {
+    fetch("http://localhost:3001/recipes/" + id, {
+      method: 'PUT',
+      body: JSON.stringify({"score": score}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.props.updateRecipes('')
+        },
+        (error) => {
+          console.log(error)
+        }
+      )
   }
 
   handleChange(e) {
@@ -27,11 +47,12 @@ class Recipe extends React.Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    if (this.state.newScore) {
+    const newScore = this.state.newScore
+    if (newScore) {
       if (this.state.alreadyPush) {
         alert("Solo puedes votar 1 vez.")
       } else {
-        this.state.recipe.scores.push(parseInt(this.state.newScore))
+        this.putScore(this.state.recipe.id, parseInt(newScore))
       }
       this.setState({
         alreadyPush: true

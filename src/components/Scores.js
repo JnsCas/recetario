@@ -30,6 +30,7 @@ class Scores extends React.Component {
         <Recipe
           recipeSelected={this.state.recipeSelected}
           recipeAverageSelected={this.state.recipeAverageSelected}
+          updateRecipes={this.props.updateRecipes}
         />
       );
     } else {

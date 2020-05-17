@@ -16,7 +16,7 @@ class App extends React.Component {
       isShowingRecipes: true
     }
     this.changeTableToShow = this.changeTableToShow.bind(this)
-    this.filterRecipes = this.filterRecipes.bind(this)
+    this.filterAndUpdateRecipes = this.filterAndUpdateRecipes.bind(this)
     this.createRecipesAndAverage = this.createRecipesAndAverage.bind(this)
     this.calculateAverageScore = this.calculateAverageScore.bind(this)
   }
@@ -48,7 +48,7 @@ class App extends React.Component {
     })
   }
 
-  filterRecipes(toSearch) {
+  filterAndUpdateRecipes(toSearch) {
     const queryParam = toSearch !== '' ? `?filter=${toSearch}` : ""
     fetch("http://localhost:3001/recipes" + queryParam)
       .then(res => res.json())
@@ -68,7 +68,6 @@ class App extends React.Component {
         }
       )
   }
-
 
   calculateAverageScore(scores) {
     const totalScores = scores.reduce((a, b) => a+b)
@@ -96,10 +95,10 @@ class App extends React.Component {
         recipesAndAverage = this.createRecipesAndAverage();
       if (this.state.isShowingRecipes) {
         textButton = "valoraciones"
-        tableToShow = <Recipes recipesAndAverage={recipesAndAverage} />
+        tableToShow = <Recipes recipesAndAverage={recipesAndAverage} updateRecipes={this.filterAndUpdateRecipes}/>
       } else {
         textButton = "recetas"
-        tableToShow = <Scores recipesAndAverage={recipesAndAverage} />
+        tableToShow = <Scores recipesAndAverage={recipesAndAverage} updateRecipes={this.filterAndUpdateRecipes} />
       }
       return (
         <div className="App-background">
@@ -107,7 +106,7 @@ class App extends React.Component {
             <h1>Recetario</h1>
           </div>
           <div className="App-body">
-            <Search onClickSearchButton={this.filterRecipes}/>
+            <Search onClickSearchButton={this.filterAndUpdateRecipes}/>
             <a href="#" onClick={this.changeTableToShow}> Ver {textButton} </a>
             {tableToShow}
           </div>
