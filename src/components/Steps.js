@@ -4,10 +4,10 @@ class Steps extends React.Component {
 
   render() {
     return(
-      <div className="Steps">
+      <div className="Recipe-tabs-content">
         {this.props.steps.map(step => (
           <li key={step}> {step} </li>
-          ))}
+        ))}
       </div>
     )
   }

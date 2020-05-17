@@ -32,7 +32,7 @@ class Ingredients extends React.Component {
 
   render() {
     return(
-      <div className="Ingredients">
+      <div className="Recipe-tabs-content">
         <p>
           <label>Para <input
               className="Ingredients-input"

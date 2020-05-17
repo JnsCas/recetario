@@ -1,7 +1,7 @@
 import React from 'react'
 import Tab from "react-bootstrap/Tab";
 import Tabs from "react-bootstrap/Tabs";
-import Recipe from "./Recipe";
+import RecipeDetails from "./RecipeDetails";
 import ScoreTable from "./ScoreTable";
 
 class Scores extends React.Component {
@@ -27,7 +27,7 @@ class Scores extends React.Component {
   render() {
     if (this.state.isShowingRecipe) {
       return(
-        <Recipe
+        <RecipeDetails
           recipeSelected={this.state.recipeSelected}
           recipeAverageSelected={this.state.recipeAverageSelected}
           updateRecipes={this.props.updateRecipes}

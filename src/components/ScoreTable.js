@@ -27,7 +27,7 @@ class ScoreTable extends React.Component {
         {recipesAndAverage.map((recipeAndAverage) => (
           <tr key={recipeAndAverage.recipe.name}>
             <td>
-              <a href="#" onClick={(e) => this.props.onClickShowRecipe(e, recipeAndAverage)}>{recipeAndAverage.recipe.name} </a>
+              <a className="Button-change-view" href="#" onClick={(e) => this.props.onClickShowRecipe(e, recipeAndAverage)}>{recipeAndAverage.recipe.name} </a>
             </td>
             <td>
               {recipeAndAverage.average}

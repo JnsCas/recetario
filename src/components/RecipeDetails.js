@@ -5,7 +5,7 @@ import Ingredients from "./Ingredients";
 import Steps from "./Steps";
 import {Button} from "react-bootstrap";
 
-class Recipe extends React.Component {
+class RecipeDetails extends React.Component {
 
   constructor(props) {
     super(props);
@@ -76,8 +76,8 @@ class Recipe extends React.Component {
               peopleQuantity={this.state.recipe.peopleQuantity}
             />
           </Tab>
-          <Tab eventKey="steps" title="Pasos">
-            <Steps steps={this.state.recipe.steps}/>
+          <Tab eventKey="steps" title="Pasos" width="100%">
+            <Steps steps={this.state.recipe.steps} />
           </Tab>
         </Tabs>
         <div className="Score-push">
@@ -98,4 +98,4 @@ class Recipe extends React.Component {
   }
 }
 
-export default Recipe
+export default RecipeDetails

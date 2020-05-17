@@ -1,5 +1,5 @@
 import React from 'react'
-import Recipe from "./Recipe";
+import RecipeDetails from "./RecipeDetails";
 import ScoreTable from "./ScoreTable";
 
 class Recipes extends React.Component {
@@ -25,7 +25,7 @@ class Recipes extends React.Component {
   render() {
     if (this.state.isShowingRecipe) {
       return (
-        <Recipe
+        <RecipeDetails
           recipeSelected={this.state.recipeSelected}
           recipeAverageSelected={this.state.recipeAverageSelected}
           updateRecipes={this.props.updateRecipes}
