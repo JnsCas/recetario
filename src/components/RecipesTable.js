@@ -24,6 +24,7 @@ class RecipesTable extends React.Component {
       recipeAverageSelected: recipeAndAverage.average
     })
   }
+
   calculateAverageScore(scores) {
     console.log(scores)
     const totalScores = scores.reduce((a, b) => a+b)
