@@ -17,6 +17,8 @@ class App extends React.Component {
     }
     this.changeTableToShow = this.changeTableToShow.bind(this)
     this.filterRecipes = this.filterRecipes.bind(this)
+    this.createRecipesAndAverage = this.createRecipesAndAverage.bind(this)
+    this.calculateAverageScore = this.calculateAverageScore.bind(this)
   }
 
   componentDidMount() {
@@ -70,6 +72,22 @@ class App extends React.Component {
       )
   }
 
+
+  calculateAverageScore(scores) {
+    const totalScores = scores.reduce((a, b) => a+b)
+    const newAverage = totalScores / scores.length
+    return Number.isInteger(newAverage) ? newAverage : newAverage.toFixed(1)
+  }
+
+  createRecipesAndAverage() {
+    return this.state.recipes.map(recipe => {
+      let recipeAndAverage = {};
+      recipeAndAverage.recipe = recipe;
+      recipeAndAverage.average = this.calculateAverageScore(recipe.scores);
+      return recipeAndAverage;
+    })
+  }
+
   render() {
     if (this.state.error) {
       return <div>Error: {this.state.error.message}</div>;
@@ -79,10 +97,10 @@ class App extends React.Component {
       let textButton, tableToShow;
       if (this.state.isShowingMenu) {
         textButton = "valoraciones"
-        tableToShow = <Menu recipes={this.state.recipes}/>
+        tableToShow = <Menu recipesAndAverage={this.createRecipesAndAverage()}/>
       } else {
         textButton = "menú"
-        tableToShow = <Scores recipes={this.state.recipes}/>
+        tableToShow = <Scores recipesAndAverage={this.createRecipesAndAverage()} />
       }
       return (
         <div className="App-background">

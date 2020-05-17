@@ -13,7 +13,6 @@ class RecipesTable extends React.Component {
     }
 
     this.showRecipe = this.showRecipe.bind(this)
-    this.calculateAverageScore = this.calculateAverageScore.bind(this)
   }
 
   showRecipe(e, recipeAndAverage) {
@@ -25,14 +24,6 @@ class RecipesTable extends React.Component {
     })
   }
 
-  calculateAverageScore(scores) {
-    console.log(scores)
-    const totalScores = scores.reduce((a, b) => a+b)
-    console.log(totalScores)
-    const newAverage = totalScores / scores.length
-    return Number.isInteger(newAverage) ? newAverage : newAverage.toFixed(1)
-  }
-
   render() {
     let viewToShow;
     if (this.state.isShowingRecipe) {
@@ -41,28 +32,16 @@ class RecipesTable extends React.Component {
         recipeAverageSelected={this.state.recipeAverageSelected}
       />
     } else {
-      let secondColumnName;
-      if (this.props.isMenuView) { //FIXME
-        secondColumnName = "Puntaje"
-      } else {
-        secondColumnName = "Promedio"
-      }
-      const recipesAndAverage = this.props.recipes.map(recipe => {
-        let recipeAndAverage = {};
-        recipeAndAverage.recipe = recipe;
-        recipeAndAverage.average = this.calculateAverageScore(recipe.scores);
-        return recipeAndAverage;
-      })
       viewToShow =
         <Table striped bordered hover>
           <thead align="center">
           <tr>
             <th>Recetas</th>
-            <th>{secondColumnName}</th>
+            <th>Promedio</th>
           </tr>
           </thead>
           <tbody align="center">
-          {recipesAndAverage.map((recipeAndAverage) => (
+          {this.props.recipesAndAverage.map((recipeAndAverage) => (
             <tr key={recipeAndAverage.recipe.name}>
               <td>
                 <a href="#" onClick={(e) => this.showRecipe(e, recipeAndAverage)}>{recipeAndAverage.recipe.name} </a>

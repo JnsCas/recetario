@@ -5,7 +5,7 @@ class Menu extends React.Component {
 
   render() {
     return (
-      <RecipesTable isMenuView={true} recipes={this.props.recipes} />
+      <RecipesTable recipesAndAverage={this.props.recipesAndAverage} />
     );
   }
 }
