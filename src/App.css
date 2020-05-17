@@ -20,10 +20,21 @@
   width: 60%;
 }
 
+.Tables-view {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .App-search {
   display: flex;
   align-items: center;
   flex-direction: row;
+}
+
+.Scores-table {
+  width: 100%;
 }
 
 .Recipe {

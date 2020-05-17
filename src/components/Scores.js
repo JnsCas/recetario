@@ -35,27 +35,29 @@ class Scores extends React.Component {
       );
     } else {
       return (
-        <Tabs
-          id="controlled-tab-example"
-          className="Recipe-tabs"
-          activeKey={this.state.key}
-          onSelect={(key) => this.setState({ key })}
-        >
-          <Tab eventKey="best" title="Mejor Puntaje">
-            <ScoreTable
-              recipesAndAverage={this.props.recipesAndAverage}
-              onClickShowRecipe={this.showRecipe}
-              order={"desc"}
-            />
-          </Tab>
-          <Tab eventKey="worst" title="Peor Puntaje">
-            <ScoreTable
-              recipesAndAverage={this.props.recipesAndAverage}
-              onClickShowRecipe={this.showRecipe}
-              order={"asc"}
-            />
-          </Tab>
-        </Tabs>
+        <div className="Scores-table">
+          <Tabs
+            id="controlled-tab-example"
+            className="Recipe-tabs"
+            activeKey={this.state.key}
+            onSelect={(key) => this.setState({ key })}
+          >
+            <Tab eventKey="best" title="Mejor Puntaje">
+              <ScoreTable
+                recipesAndAverage={this.props.recipesAndAverage}
+                onClickShowRecipe={this.showRecipe}
+                order={"desc"}
+              />
+            </Tab>
+            <Tab eventKey="worst" title="Peor Puntaje">
+              <ScoreTable
+                recipesAndAverage={this.props.recipesAndAverage}
+                onClickShowRecipe={this.showRecipe}
+                order={"asc"}
+              />
+            </Tab>
+          </Tabs>
+        </div>
       );
     }
   }

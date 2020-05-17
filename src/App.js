@@ -108,7 +108,9 @@ class App extends React.Component {
           <div className="App-body">
             <Search onClickSearchButton={this.filterAndUpdateRecipes}/>
             <a href="#" onClick={this.changeTableToShow}> Ver {textButton} </a>
-            {tableToShow}
+            <div className="Tables-view">
+              {tableToShow}
+            </div>
           </div>
         </div>
       )

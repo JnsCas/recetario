@@ -12,26 +12,28 @@ class ScoreTable extends React.Component {
       }
     })
     return (
-      <Table striped bordered hover>
-        <thead align="center">
-        <tr>
-          <th>Recetas</th>
-          <th>Promedio</th>
-        </tr>
-        </thead>
-        <tbody align="center">
-        {recipesAndAverage.map((recipeAndAverage) => (
-          <tr key={recipeAndAverage.recipe.name}>
-            <td>
-              <a className="Button-change-view" href="#" onClick={(e) => this.props.onClickShowRecipe(e, recipeAndAverage)}>{recipeAndAverage.recipe.name} </a>
-            </td>
-            <td>
-              {recipeAndAverage.average}
-            </td>
+      <div className="Scores-table">
+        <Table striped bordered hover>
+          <thead align="center">
+          <tr>
+            <th>Recetas</th>
+            <th>Promedio</th>
           </tr>
-        ))}
-        </tbody>
-      </Table>
+          </thead>
+          <tbody align="center">
+          {recipesAndAverage.map((recipeAndAverage) => (
+            <tr key={recipeAndAverage.recipe.name}>
+              <td>
+                <a className="Button-change-view" href="#" onClick={(e) => this.props.onClickShowRecipe(e, recipeAndAverage)}>{recipeAndAverage.recipe.name} </a>
+              </td>
+              <td>
+                {recipeAndAverage.average}
+              </td>
+            </tr>
+          ))}
+          </tbody>
+        </Table>
+      </div>
     );
   }
 
