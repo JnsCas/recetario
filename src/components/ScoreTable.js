@@ -3,10 +3,6 @@ import Table from "react-bootstrap/Table";
 
 class ScoreTable extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const recipesAndAverage = this.props.recipesAndAverage.sort((a, b) => {
       if (this.props.order === "desc") {
