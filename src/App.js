@@ -1,5 +1,5 @@
 import React from 'react';
-import Menu from './components/Menu'
+import Recipes from './components/Recipes'
 import 'bootstrap/dist/css/bootstrap.css';
 import './App.css';
 import Search from "./components/Search";
@@ -13,7 +13,7 @@ class App extends React.Component {
       error: null,
       isLoaded: false,
       recipes: [],
-      isShowingMenu: true
+      isShowingRecipes: true
     }
     this.changeTableToShow = this.changeTableToShow.bind(this)
     this.filterRecipes = this.filterRecipes.bind(this)
@@ -44,13 +44,10 @@ class App extends React.Component {
   changeTableToShow(e) {
     e.preventDefault();
     this.setState({
-      isShowingMenu: !this.state.isShowingMenu
+      isShowingRecipes: !this.state.isShowingRecipes
     })
   }
 
-  /**
-   *  TODO
-   */
   filterRecipes(toSearch) {
     const queryParam = toSearch !== '' ? `?filter=${toSearch}` : ""
     fetch("http://localhost:3001/recipes" + queryParam)
@@ -94,13 +91,15 @@ class App extends React.Component {
     } else if (!this.state.isLoaded) {
       return <div>Loading...</div>;
     } else {
-      let textButton, tableToShow;
-      if (this.state.isShowingMenu) {
+      let textButton,
+        tableToShow,
+        recipesAndAverage = this.createRecipesAndAverage();
+      if (this.state.isShowingRecipes) {
         textButton = "valoraciones"
-        tableToShow = <Menu recipesAndAverage={this.createRecipesAndAverage()}/>
+        tableToShow = <Recipes recipesAndAverage={recipesAndAverage} />
       } else {
-        textButton = "menú"
-        tableToShow = <Scores recipesAndAverage={this.createRecipesAndAverage()} />
+        textButton = "recetas"
+        tableToShow = <Scores recipesAndAverage={recipesAndAverage} />
       }
       return (
         <div className="App-background">

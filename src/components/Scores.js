@@ -25,15 +25,15 @@ class Scores extends React.Component {
   }
 
   render() {
-    let viewToShow;
     if (this.state.isShowingRecipe) {
-      viewToShow =
+      return(
         <Recipe
           recipeSelected={this.state.recipeSelected}
           recipeAverageSelected={this.state.recipeAverageSelected}
         />
+      );
     } else {
-      viewToShow =
+      return (
         <Tabs
           id="controlled-tab-example"
           className="Recipe-tabs"
@@ -55,9 +55,8 @@ class Scores extends React.Component {
             />
           </Tab>
         </Tabs>
+      );
     }
-
-    return viewToShow;
   }
 }
 
